@@ -1,0 +1,23 @@
+### schema.prisma
+1. Create Realation between Comments and User
+
+
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiOGFmM2JhZTUtOTdjNy00Nzg4LTg5MDUtNjFmNTc4NmZmZDFiIiwidGVuYW50X2lkIjoiM2YzNDA3Y2RjYTQzYzE3NjVmODI5YWJhNTgyOTc5ZmQ2OGNhYjYzMTllNzM4ZTEzOWU4ZTRhNzQ4NmQ0MDE4YSIsImludGVybmFsX3NlY3JldCI6IjVjNWI2ZWE3LTUzMWEtNDQyMi04NDhjLTk4NDQwZDQ1ODc2ZCJ9.gzt7FZnBU3ztnm5IMpqkvkPc81Uk1gBpJu7emSK7Kxc"
+
+JWT_SECRET="2106"
+node_compat = true
+-inspireboard
+
+name = "backend-inspireboard"
+main = "src/index.ts"
+compatibility_date = "2024-02-08"
+
+[vars]
+JWT_SECRET="2106"
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMGI4MTBjOTctMTM0YS00NDQ4LTgwOTktZWYyNTU0ZGFlNTAwIiwidGVuYW50X2lkIjoiN2NkNDllMTdjYzdmYWE5M2E3Zjc2ZjBhNmI1YWE1ZmYyNGMwYThkNjRlNTQ3NjgzZWVhNGNiZTk2NTZjZjAwOCIsImludGVybmFsX3NlY3JldCI6IjY5MWVjZDA0LTVkNjQtNDdmNi1hNzA3LWJiMTY5MTc0MzZiOCJ9.VSMK4WdC9s5Y8XWgvyhkX8q5ELnMzByGTXwE7t8p6fM"
+
+
+
+
+DATABASE_URL="postgres://avnadmin:AVNS_K_O4j3paUP3LJd9twCa@pg-266060eb-shahhetav2106-4efc.a.aivencloud.com:25335/defaultdb?sslmode=require"
+JWT_SECRET="2106"
