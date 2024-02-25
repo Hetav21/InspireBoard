@@ -31,7 +31,7 @@ x. **RETURN**: userId as hono context variable
 2. Gets the userId from middleware 
 3. Create a pin payload with { title, about, url, category, userId }
 3. Uploads pin to the db and gets the pinId on completion
-x. **RETURN**: JSON { pinUpload, inputError?, dbError,pinId?, url?, title?, about?, createdAt? }
+x. **RETURN**: JSON { pinUpload, inputError?, dbError,  Pin? { postId, title, about, url, category, createdAt, userId, isEdited: true } }
 
 OP. Redirects to /pin/:pinId
 TODO. Adding Schema for Category and Code for each category
@@ -41,7 +41,7 @@ TODO. Upload functionality for urls
 1. **INPUT**: URL Param: postId
             : Header: Authorization: JWT Token
 2. Shows a particular pin after getting pinId
-x. **RETURN**: JSON { pinFound, pin?:{postId, title, about, url, category, createdAt, userId }, !pinExists?, invalidPinId? }
+x. **RETURN**: JSON { pinFound, pin?:{postId, title, about, url, category, createdAt, userId, isEdited }, !pinExists?, invalidPinId? }
 
 ### /explore/:n _GET_
 1. **INPUT**: URL Param: n _OPTIONAL_
@@ -50,9 +50,18 @@ x. **RETURN**: JSON { pinFound, pin?:{postId, title, about, url, category, creat
 x. **RETURN** JSON { pin[] }
 
 OP. Showing end of feed when all the pins are exhausted
+TODO. Testing the sorting algorithm
+
+### /edit/:pinId
+1. **INPUT**: URL Param: pinId
+            : Header: Authorization: JWT Token
+2. Checks if user has access to the pin
+3. Lets user edit the pin
+4. Changes isEdited to true
+5. **RETURN**: JSON { pinEdit, invalidPinId?, invalidPin?, unauthorized?, inputError?, Pin? { postId, title, about, url, category, createdAt, userId, isEdited: true } } 
 
 ### /profile/:userId
-1. Profile page with boards
+1. Profile page with boards and pins
 
 ### /feed/:boardId
 1. feed page with all different pins
@@ -62,5 +71,3 @@ OP. Showing end of feed when all the pins are exhausted
 
 ### /delete/:pinId&&:boardId
 1. deletes a particular pin from a board
-
-### edit

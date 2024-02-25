@@ -38,6 +38,7 @@ model Pin {
   url String @db.VarChar(255)
   category String 
   createdAt DateTime @default(now())
+  isEdited Boolean @default(false)
 
   user User @relation(fields: [userId], references: [userId])
   userId String

@@ -6,6 +6,7 @@ import uploadRouter from "./routes/upload";
 import { decode, sign, verify } from 'hono/jwt';
 import pinRouter from "./routes/pin";
 import exploreRouter from "./routes/explore";
+import editRouter from "./routes/edit";
 
 const app = new Hono<{
     Bindings: {
@@ -56,5 +57,7 @@ app.route("/upload", uploadRouter);
 app.route("/pin/", pinRouter);
 
 app.route("/explore", exploreRouter);
+
+app.route("/edit", editRouter)
 
 export default app;
