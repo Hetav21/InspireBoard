@@ -21,7 +21,18 @@ x. **RETURN**: JSON {  useLogin, idToken? , !userExists?, inputError?, authError
 
 OP. Redirects to Profile Page
 
-### explore
+### /upload _POST_
+1. **INPUT**: BODY { title, about, url, category }
+2. Gets the userId from middleware *Middleware*
+3. Create a pin payload with { title, about, url, category, userId }
+3. Uploads pin to the db and gets the pinId on completion
+x. **RETURN**: JSON { uploadCompleted, pinId?, url?, title?, about?, createdAt? }
+
+OP. Redirects to /pin/:pinId
+
+### /pin/:pinId
+
+### /explore
 
 ### /profile
 1. Profile page with boards
@@ -35,6 +46,5 @@ OP. Redirects to Profile Page
 ### /delete/:pinId&&:boardId
 1. deletes a particular pin from a board
 
-### upload
 
 ### edit

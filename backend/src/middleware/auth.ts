@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
 
-const Middleware = new Hono<{
+const Middleware = new Hono <{
 	Bindings: {
 		DATABASE_URL: string,
         JWT_SECRET: string

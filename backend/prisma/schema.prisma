@@ -18,8 +18,8 @@ model User {
   username String @unique
   email String @unique
   password String
+  posts Pin[]
   // profile Profile?
-  // posts Pin[]
   // comments Comment[]
 }
 
@@ -31,15 +31,16 @@ model User {
 // }
 
 model Pin {
-  postId Int @id @default(autoincrement())
+  postId String @id @default(uuid())
   
   title String
   about String
-  destination String
+  url String
   category String
+  createdAt DateTime @default(now())
 
-  // user User @relation(fields: [postId], references: [userId])
-  
+  userId String
+  user User @relation(fields: [postId], references: [userId])
   // comments Comment[]
 }
 
