@@ -1,29 +1,26 @@
-import { Hono } from "hono";
-import { Pin, PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
-import UserType from "../CustomTypes/User";
-import { decode, sign, verify } from 'hono/jwt';
-import { z } from "zod";
-import Middleware from "../middleware/auth";
-import PinType from "../CustomTypes/Pin";
+import { Hono } from 'hono/tiny';
+import { PrismaClient } from '@prisma/client/edge';
+import { withAccelerate } from '@prisma/extension-accelerate';
+import { z } from 'zod';
+import PinType from '../CustomTypes/Pin';
 
 const uploadRouter = new Hono<{
 	Bindings: {
-		DATABASE_URL: string,
-        JWT_SECRET: string
-	},
+		DATABASE_URL: string;
+		JWT_SECRET: string;
+	};
 	Variables: {
-		userId: string
-	}
+		userId: string;
+	};
 }>();
 
-uploadRouter.post("/" ,async(c) => {
+uploadRouter.post('/', async (c) => {
 	// Taking pin as input
 	const body = await c.req.json();
 	const Payload: PinType = body.pin;
 
 	// Adding userId to Payload
-	Payload.userId = c.get("userId");
+	Payload.userId = c.get('userId');
 
 	// Input Validation
 	const pinSchema = z.object({
@@ -31,23 +28,23 @@ uploadRouter.post("/" ,async(c) => {
 		about: z.string().optional(),
 		url: z.string().url(),
 		category: z.string().min(3),
-		userId: z.string().uuid()
+		userId: z.string().uuid(),
 	});
 
 	const res = pinSchema.safeParse(Payload);
 
-	if(res.success == false){
+	if (res.success == false) {
 		c.status(400);
 		return c.json({
 			pinUpload: false,
-			inputError: true
+			inputError: true,
 		});
 	}
 
 	// Uploading Pin to db
 	const Prisma = new PrismaClient({
 		datasourceUrl: c.env.DATABASE_URL,
-	}).$extends(withAccelerate())
+	}).$extends(withAccelerate());
 
 	const Pin = await Prisma.pin.create({
 		data: {
@@ -55,24 +52,23 @@ uploadRouter.post("/" ,async(c) => {
 			about: Payload.about,
 			url: Payload.url,
 			category: Payload.category,
-			userId: Payload.userId
-		}
-	})
+			userId: Payload.userId,
+		},
+	});
 
-	if(Pin == null){
+	if (Pin == null) {
 		c.status(500);
 		return c.json({
 			pinUpload: false,
-			dbError: true
+			dbError: true,
 		});
 	}
 
 	// Success:
 	return c.json({
 		pinUpload: true,
-		Pin
+		Pin,
 	});
-})
-
+});
 
 export default uploadRouter;

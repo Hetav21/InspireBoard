@@ -19,17 +19,21 @@ model User {
   email String @unique
   password String
   posts Pin[]
+  boards Board[]
+
   // profile Profile?
   // comments Comment[]
 }
 
-// model Profile {
-//   profileId Int @id @default(autoincrement())
-//   firstName String
-//   lastName String?
-//   user User @relation(fields: [profileId], references: [userId])
-// }
-
+model Board {
+  boardId String @id @default(uuid())
+  title String @db.VarChar(255)
+  
+  user User @relation(fields: [userId], references: [userId])
+  userId String
+  
+  posts Pin[]
+}
 model Pin {
   postId String @id @default(uuid())
   
@@ -42,8 +46,17 @@ model Pin {
 
   user User @relation(fields: [userId], references: [userId])
   userId String
+
+  board Board? @relation(fields: [boardId], references: [boardId])
+  boardId String?
   // comments Comment[]
 }
+// model Profile {
+//   profileId Int @id @default(autoincrement())
+//   firstName String
+//   lastName String?
+//   user User @relation(fields: [profileId], references: [userId])
+// }
 
 // model Comment {
 //   commentId Int @id @default(autoincrement())

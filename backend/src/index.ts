@@ -1,12 +1,16 @@
 import { Hono } from "hono";
 import registerRouter from "./routes/register";
 import loginRouter from "./routes/login";
-import Middleware from "./middleware/auth";
 import uploadRouter from "./routes/upload";
-import { decode, sign, verify } from 'hono/jwt';
+import { verify } from 'hono/jwt';
 import pinRouter from "./routes/pin";
 import exploreRouter from "./routes/explore";
 import editRouter from "./routes/edit";
+import saveRouter from "./routes/save";
+import createRouter from "./routes/board";
+import feedRouter from "./routes/feed";
+import deleteRouter from "./routes/delete";
+import profileRouter from "./routes/profile";
 
 const app = new Hono<{
     Bindings: {
@@ -58,6 +62,16 @@ app.route("/pin/", pinRouter);
 
 app.route("/explore", exploreRouter);
 
-app.route("/edit", editRouter)
+app.route("/edit", editRouter);
+
+app.route("/create", createRouter);
+
+app.route("/save", saveRouter);
+
+app.route("/feed", feedRouter);
+
+app.route("/delete", deleteRouter);
+
+app.route("/profile", profileRouter);
 
 export default app;
