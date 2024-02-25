@@ -43,10 +43,13 @@ TODO. Upload functionality for urls
 2. Shows a particular pin after getting pinId
 x. **RETURN**: JSON { pinFound, pin?:{postId, title, about, url, category, createdAt, userId }, !pinExists?, invalidPinId? }
 
-### /explore _GET_
-1. **INPUT**: Header: Authorization: JWT Token
-2. Sorts the pins by creation time and returns array of pins
+### /explore/:n _GET_
+1. **INPUT**: URL Param: n _OPTIONAL_
+            : Header: Authorization: JWT Token
+2. Sorts the pins by creation time and returns array of pins for the first n || 100 pins
 x. **RETURN** JSON { pin[] }
+
+OP. Showing end of feed when all the pins are exhausted
 
 ### /profile/:userId
 1. Profile page with boards
@@ -59,6 +62,5 @@ x. **RETURN** JSON { pin[] }
 
 ### /delete/:pinId&&:boardId
 1. deletes a particular pin from a board
-
 
 ### edit
