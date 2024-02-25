@@ -52,7 +52,7 @@ x. **RETURN** JSON { pin[] }
 OP. Showing end of feed when all the pins are exhausted
 TODO. Testing the sorting algorithm
 
-### /edit/:pinId
+### /edit/:pinId _PUT_
 1. **INPUT**: URL Param: pinId
             : Header: Authorization: JWT Token
 2. Checks if user has access to the pin
