@@ -25,7 +25,8 @@ const userSchema = z.object({
 
 const res = userSchema.safeParse(login);
 
-if(res.success == false){
+if(res.success == false)
+{   c.status(400)
     return c.json({
         userLogin: false,
         inputError: true
@@ -50,6 +51,7 @@ const user = await Prisma.user.findUnique({
 });
 
 if(user == null){
+    c.status(500)
     return c.json({
         userLogin: false,
         userExists: false
@@ -58,6 +60,7 @@ if(user == null){
 
 // Comparing Passwords
 if(user.password != login.password){
+    c.status(403)
     return c.json({
         userLogin: false,
         authError: true

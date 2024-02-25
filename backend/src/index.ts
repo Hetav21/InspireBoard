@@ -25,14 +25,20 @@ app.use(async (c, next) => {
     const token: string = c.req.header("authorization") || "";
 
     if(token == null){
+        c.status(401);
+
         c.json({
             tokenError: true
         });
+
+        return ;
     }
 
     const payload = await verify(token, c.env.JWT_SECRET);
 
     if(payload == null){
+        c.status(403);
+
         c.json({
             tokenError: true,
             authError: true

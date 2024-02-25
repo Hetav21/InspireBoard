@@ -27,6 +27,7 @@ registerRouter.post("/", async (c) => {
     const res = userSchema.safeParse(user);
 
     if(res.success == false){
+        c.status(400)
         return c.json({
             userCreated: false,
             inputError: true
@@ -45,6 +46,7 @@ registerRouter.post("/", async (c) => {
     });
 
     if(userExists != null){
+        c.status(403)
         return c.json({
             userCreated: false,
             userExists: true
@@ -63,6 +65,7 @@ registerRouter.post("/", async (c) => {
 
     //Error Handling
     if(newUser == null){
+        c.status(500)
         return c.json({
             userCreated: false,
             dbError: true

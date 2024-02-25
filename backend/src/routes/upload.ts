@@ -37,6 +37,7 @@ uploadRouter.post("/" ,async(c) => {
 	const res = pinSchema.safeParse(Payload);
 
 	if(res.success == false){
+		c.status(400);
 		return c.json({
 			pinUpload: false,
 			inputError: true
@@ -59,6 +60,7 @@ uploadRouter.post("/" ,async(c) => {
 	})
 
 	if(Pin == null){
+		c.status(500);
 		return c.json({
 			pinUpload: false,
 			dbError: true
