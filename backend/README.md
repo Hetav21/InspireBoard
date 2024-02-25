@@ -1,7 +1,7 @@
 # **Routes:** 
 
 ### /register _POST_
-1. **INPUT**: BODY {username, password, email}
+1. **INPUT**: BODY: user {username, password, email}
 2. Input Validation
 3. Checks if username and email are taken
 4. [TODO] Hash the password given
@@ -11,7 +11,7 @@ x. **RETURN**: JSON { userCreated, idToken? , userExists? ,inputError?, dbError?
 OP. Redirects to Profile Page
 
 ### /login _POST_
-1. **INPUT**: BODY {username, password, email}
+1. **INPUT**: BODY: login {username, password, email}
 2. Login using username OR email in username section
 3. Checks if username OR email exists
 4. Returns user from db
@@ -22,13 +22,15 @@ x. **RETURN**: JSON {  useLogin, idToken? , !userExists?, inputError?, authError
 OP. Redirects to Profile Page
 
 ### /upload _POST_
-1. **INPUT**: BODY { title, about, url, category }
+1. **INPUT**: BODY: pin { title, about, url, category }
 2. Gets the userId from middleware *Middleware*
 3. Create a pin payload with { title, about, url, category, userId }
 3. Uploads pin to the db and gets the pinId on completion
-x. **RETURN**: JSON { uploadCompleted, pinId?, url?, title?, about?, createdAt? }
+x. **RETURN**: JSON { pinUpload, inputError?, dbError,pinId?, url?, title?, about?, createdAt? }
 
 OP. Redirects to /pin/:pinId
+TODO. Adding Schema for Category and Code for each category
+TODO. Upload functionality for urls
 
 ### /pin/:pinId
 

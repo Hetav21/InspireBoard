@@ -33,14 +33,14 @@ model User {
 model Pin {
   postId String @id @default(uuid())
   
-  title String
-  about String
-  url String
-  category String
+  title String @db.VarChar(255)
+  about String? @db.VarChar(255)
+  url String @db.VarChar(255)
+  category String 
   createdAt DateTime @default(now())
 
+  user User @relation(fields: [userId], references: [userId])
   userId String
-  user User @relation(fields: [postId], references: [userId])
   // comments Comment[]
 }
 

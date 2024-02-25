@@ -14,9 +14,9 @@ const app = new Hono<{
     }
 }>();
 
-app.route("/").get(async (c) => {
+app.all("/", async (c) => {
     return c.text("Hello World!!");
-})
+}) 
 
 app.route("/register", registerRouter);
 app.route("/login", loginRouter);
@@ -39,7 +39,7 @@ app.use(async (c, next) => {
         });
     }
 
-    c.set('userId', payload.userId);
+    c.set('userId', payload);
 
     await next();
 })
