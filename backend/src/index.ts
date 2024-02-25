@@ -4,6 +4,7 @@ import loginRouter from "./routes/login";
 import Middleware from "./middleware/auth";
 import uploadRouter from "./routes/upload";
 import { decode, sign, verify } from 'hono/jwt';
+import pinRouter from "./routes/pin";
 
 const app = new Hono<{
     Bindings: {
@@ -50,5 +51,7 @@ app.use(async (c, next) => {
     await next();
 })
 app.route("/upload", uploadRouter);
+
+app.route("/pin/", pinRouter);
 
 export default app;

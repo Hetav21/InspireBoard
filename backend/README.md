@@ -21,9 +21,14 @@ x. **RETURN**: JSON {  useLogin, idToken? , !userExists?, inputError?, authError
 
 OP. Redirects to Profile Page
 
+## *Middleware*: **The following request would be passed though a middleware**
+1. **INPUT**: Header: Authorization: JWT Token
+x. **RETURN**: userId as hono context variable
+
 ### /upload _POST_
 1. **INPUT**: BODY: pin { title, about, url, category }
-2. Gets the userId from middleware *Middleware*
+            : Header: Authorization: JWT Token
+2. Gets the userId from middleware 
 3. Create a pin payload with { title, about, url, category, userId }
 3. Uploads pin to the db and gets the pinId on completion
 x. **RETURN**: JSON { pinUpload, inputError?, dbError,pinId?, url?, title?, about?, createdAt? }
@@ -32,11 +37,18 @@ OP. Redirects to /pin/:pinId
 TODO. Adding Schema for Category and Code for each category
 TODO. Upload functionality for urls
 
-### /pin/:pinId
+### /pin/:pinId _GET_
+1. **INPUT**: URL Param: postId
+            : Header: Authorization: JWT Token
+2. Shows a particular pin after getting pinId
+x. **RETURN**: JSON { pinFound, pin?:{postId, title, about, url, category, createdAt, userId }, !pinExists?, invalidPinId? }
 
-### /explore
+### /explore _GET_
+1. **INPUT**: Header: Authorization: JWT Token
+2. Sorts the pins by creation time and returns array of pins
+x. **RETURN** JSON { pin[] }
 
-### /profile
+### /profile/:userId
 1. Profile page with boards
 
 ### /feed/:boardId
