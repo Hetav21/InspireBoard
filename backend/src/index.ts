@@ -11,6 +11,7 @@ import createRouter from "./routes/board";
 import feedRouter from "./routes/feed";
 import deleteRouter from "./routes/delete";
 import profileRouter from "./routes/profile";
+import { cors } from 'hono/cors'
 
 const app = new Hono<{
     Bindings: {
@@ -20,6 +21,8 @@ const app = new Hono<{
         userId: string
     }
 }>();
+
+app.use("/*", cors())
 
 app.all("/", async (c) => {
     return c.text("Hello World!!");
